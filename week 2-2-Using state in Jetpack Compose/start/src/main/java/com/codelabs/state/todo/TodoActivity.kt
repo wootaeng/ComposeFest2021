@@ -34,10 +34,25 @@ class TodoActivity : AppCompatActivity() {
             StateCodelabTheme {
                 Surface {
                     // TODO: build the screen in compose
+                    TodoActivityScreen(todoViewModel)
                 }
             }
         }
     }
+}
+
+//새로운 viewmodel 사용할 수 있게
+@Composable
+private fun TodoActivityScreen(todoViewModel: TodoViewModel) {
+    TodoScreen(
+        items = todoViewModel.todoItems,
+        currentlyEditing = todoViewModel.currentEditItem,
+        onAddItem = todoViewModel::addItem,
+        onRemoveItem = todoViewModel::removeItem,
+        onStartEdit = todoViewModel::onEditItemSelected,
+        onEditItemChange = todoViewModel::onEditItemChange,
+        onEditDone = todoViewModel::onEditDone
+    )
 }
 
 
